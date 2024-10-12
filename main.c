@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/12 16:32:29 by htran-th         ###   ########.fr       */
+/*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
+/*   Updated: 2024/10/12 18:12:47 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include "libft.h"
-
-// First, have a node
-typedef struct s_node
+int main(int argc, char **argv)
 {
-    int value;
-    struct s_node *prev;
-    struct s_node *next;
-}   t_node;
+    t_stack a;
+    t_stack b;
+    
+    if (argc < 2)
+        return (1);
+    ft_bzero(&a, sizeof(a)); //keep it like this for now
+    //if parse argv and init stack fails -> return (1)
+    //if (argc == 2) && argv[1][0]
 
-// Now, create a (linked) list of nodes (aka a stack)
-typedef struct s_stack
-{
-    t_node *top;
-}   t_stack;
-
-#endif
+    
+    
+}
