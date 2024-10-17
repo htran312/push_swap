@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/15 21:58:37 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:41:50 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_stack
     t_node *top;
 }   t_stack;
 
-int parse_input(int argc, char **argv);
+void parse_input(int argc, char **argv);
 void	free_arr(char **ar);
+int is_valid_integer(char *str);
 
 #endif

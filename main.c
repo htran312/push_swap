@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/15 21:49:34 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/17 20:16:04 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     //t_stack a;
     
     if (argc < 2)
-        return (1);
+        return (0);
     parse_input(argc, argv);
     //ft_bzero(&a, sizeof(a)); //keep it like this for now
     //if parse argv and init stack fails -> return (1)

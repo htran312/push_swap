@@ -6,31 +6,28 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:32:11 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/16 19:06:54 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/17 21:19:05 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int is_valid_integer(char *str)
+static void error_cleanup(char ***array, char ***temp)
 {
-    (void)str;
-    return (1);
-}
-
-static int error_cleanup(char ***array, char ***temp)
-{
+    printf("help!\n");
     if (*array)
     {
         free_arr(*array);
         *array = NULL;
     }
+    printf("help2!\n");
     if (*temp)
     {
         free_arr(*temp);
         *temp = NULL;
     }
-    return (1);
+    ft_printf("Error\n");
+    exit(EXIT_FAILURE);
 }
 
 static char **join_array(char **array, char **temp, int count, int temp_size)
@@ -40,39 +37,41 @@ static char **join_array(char **array, char **temp, int count, int temp_size)
     int j;
     int old_size;
 
-    printf("count for malloc is now %d\n", (count + 1));
     new_array = malloc(sizeof(char *) * (count + 1));
-    if(!new_array)// we probably will push the number to stack anyway
-                    // instead of joining array so let's keep this
-                    // error check like this for now
-    {
-        free_arr(temp);
-        free_arr(array);
-        return (NULL);
-    }
+    if(!new_array)
+        error_cleanup(&array, &temp);
     old_size = count - temp_size;
-    printf("old size is now %d\n", old_size);
     i = 0;
     while (i < old_size)
     {
-        printf("we're here\n");
         new_array[i] = ft_strdup(array[i]);
+        if (!new_array[i])
+        {
+            free_arr(new_array);
+            new_array = NULL;
+            error_cleanup(&array, &temp);
+        }
         i++;
     }
     j = 0;
     while (temp && temp[j])
     {
-        printf("help!\n");
         new_array[i + j] = ft_strdup(temp[j]);
+        if (!new_array[i])
+        {
+            free_arr(new_array);
+            new_array = NULL;
+            error_cleanup(&array, &temp);
+        }
         j++;
     }
     new_array[i + j] = NULL;
-    free_arr(array); //free the space that was holding the addresses of the strings
+    free_arr(array);
     array = NULL;
     return (new_array);
 }
 
-int parse_input(int argc, char **argv)
+void parse_input(int argc, char **argv)
 {
     char **array;
     char **temp;
@@ -84,49 +83,42 @@ int parse_input(int argc, char **argv)
     array = NULL;
     count = 0;
     i = 0;
-    printf("argc is now %d\n", argc);
     while (++i < argc)
     {
         if (ft_strchr(argv[i], ' ') != NULL)
         {
             temp = ft_split(argv[i], ' ');
             if (!temp || !temp[0])
-                return (error_cleanup(&array, &temp));
+                error_cleanup(&array, &temp);
             j = 0;
-            while (temp && temp[j]) //&& check if it's a valid integer 
+            while (temp && temp[j])
             {
                 if (!is_valid_integer(temp[j]))
-                    return (error_cleanup(&array, &temp));
+                    error_cleanup(&array, &temp);
                 count++;
-                printf("count after split is now %d\n", count);
                 j++;
             }
-            array = join_array(array, temp, count, j); //join the result here
+            array = join_array(array, temp, count, j);
             if (!array)
-                return (error_cleanup(&array, &temp));
+                error_cleanup(&array, &temp);
             free_arr(temp);
             temp = NULL;
-            printf("printing after split\n");
-            for (int l = 0; array && array[l]; l++)
-                printf("array[%d]: %s\n", l, array[l]);
         }
         else //check if argv[i] is a valid integer then count++
         {
-            if (!is_valid_integer(argv[i]))
-                return (error_cleanup(&array, NULL));
-            count++;
-            printf("count after the integer is now %d\n", count);
             temp = malloc(sizeof(char *) * 2);
             temp[0] = ft_strdup(argv[i]);
+            if (!temp || !temp[0])
+                error_cleanup(&array, &temp);
             temp[1] = NULL;
+            if (!is_valid_integer(argv[i]))
+                error_cleanup(&array, &temp);
+            count++;
             array = join_array(array, temp, count, 1);
             if (!array)
-                return (error_cleanup(&array, NULL));
+                error_cleanup(&array, &temp);
             free_arr(temp);
             temp = NULL;
-            printf("printing after appending integer\n");
-            for (int m = 0; array && array[m]; m++)
-                printf("array[%d]: %s\n", m, array[m]);
         }
     }
     printf("we're printing the final array\n");
@@ -134,5 +126,4 @@ int parse_input(int argc, char **argv)
         printf("array[%d]: %s\n", k, array[k]);
 
     free_arr(array); //actually, we need to init_stack before reaching this point
-    return (0);
 }

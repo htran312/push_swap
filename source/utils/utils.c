@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 19:40:59 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/16 12:17:18 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/17 15:31:19 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ void	free_arr(char **ar)
 		return ;
 	while (ar[i])
 	{
-		printf("Freeing array[%d]: %p\n", i, ar[i]);
 		free (ar[i]);
 		ar[i] = NULL;
 		i++;
 	}
-	printf("Freeing array itself: %p\n", ar);
 	free (ar);
 }
