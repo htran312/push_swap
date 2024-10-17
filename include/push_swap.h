@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/17 17:41:50 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/17 21:53:51 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "libft.h"
+
+# define MIN_INT -2147483648
+# define MAX_INT 2147483647
 
 // First, have a node
 typedef struct s_node
