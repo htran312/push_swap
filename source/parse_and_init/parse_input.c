@@ -6,124 +6,88 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:32:11 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/17 21:19:05 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/18 21:26:59 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void error_cleanup(char ***array, char ***temp)
+void error_cleanup(char ***array, char ***temp)
 {
-    printf("help!\n");
     if (*array)
     {
         free_arr(*array);
         *array = NULL;
     }
-    printf("help2!\n");
     if (*temp)
     {
         free_arr(*temp);
         *temp = NULL;
     }
-    ft_printf("Error\n");
+    ft_putendl_fd("Error", 2);
     exit(EXIT_FAILURE);
 }
-
-static char **join_array(char **array, char **temp, int count, int temp_size)
+static void duplicate_array_element(char ***dst, char **src, int start, int len, t_data *dt)
 {
-    char **new_array;
     int i;
-    int j;
-    int old_size;
 
-    new_array = malloc(sizeof(char *) * (count + 1));
-    if(!new_array)
-        error_cleanup(&array, &temp);
-    old_size = count - temp_size;
     i = 0;
-    while (i < old_size)
+    while (i < len)
     {
-        new_array[i] = ft_strdup(array[i]);
-        if (!new_array[i])
+        (*dst)[start + i] = ft_strdup(src[i]);
+        if (!(*dst)[start + i])
         {
-            free_arr(new_array);
-            new_array = NULL;
-            error_cleanup(&array, &temp);
+            free_arr(*dst);
+            error_cleanup(&dt->array, &dt->temp);
         }
         i++;
     }
-    j = 0;
-    while (temp && temp[j])
-    {
-        new_array[i + j] = ft_strdup(temp[j]);
-        if (!new_array[i])
-        {
-            free_arr(new_array);
-            new_array = NULL;
-            error_cleanup(&array, &temp);
-        }
-        j++;
-    }
-    new_array[i + j] = NULL;
-    free_arr(array);
-    array = NULL;
+}
+static char **join_array(t_data *dt, int temp_size)
+{
+    char **new_array;
+    int old_size;
+    
+    old_size = dt->count - temp_size;
+    new_array = malloc(sizeof(char *) * (dt->count + 1));
+    if (!new_array)
+        error_cleanup(&dt->array, &dt->temp);
+    duplicate_array_element(&new_array, dt->array, 0, old_size, dt);
+    duplicate_array_element(&new_array, dt->temp, old_size, temp_size, dt);
+    new_array[dt->count] = NULL;
+    free_arr(dt->array);
+    dt->array = NULL;
+
     return (new_array);
 }
-
-void parse_input(int argc, char **argv)
+void parse_input(int argc, char **argv, t_data *dt, t_pushswap *ps)
 {
-    char **array;
-    char **temp;
-    int count;
     int i;
     int j;
-    //long *nbr;  
-    
-    array = NULL;
-    count = 0;
+
     i = 0;
     while (++i < argc)
     {
-        if (ft_strchr(argv[i], ' ') != NULL)
+        dt->temp = ft_split(argv[i], ' ');
+        if (!dt->temp || !dt->temp[0])
+            error_cleanup(&dt->array, &dt->temp);
+        j = 0;
+        while (dt->temp && dt->temp[j])
         {
-            temp = ft_split(argv[i], ' ');
-            if (!temp || !temp[0])
-                error_cleanup(&array, &temp);
-            j = 0;
-            while (temp && temp[j])
-            {
-                if (!is_valid_integer(temp[j]))
-                    error_cleanup(&array, &temp);
-                count++;
-                j++;
-            }
-            array = join_array(array, temp, count, j);
-            if (!array)
-                error_cleanup(&array, &temp);
-            free_arr(temp);
-            temp = NULL;
+            if (!is_integer(dt->temp[j]))
+                error_cleanup(&dt->array, &dt->temp);
+            dt->count++;
+            j++;
         }
-        else //check if argv[i] is a valid integer then count++
-        {
-            temp = malloc(sizeof(char *) * 2);
-            temp[0] = ft_strdup(argv[i]);
-            if (!temp || !temp[0])
-                error_cleanup(&array, &temp);
-            temp[1] = NULL;
-            if (!is_valid_integer(argv[i]))
-                error_cleanup(&array, &temp);
-            count++;
-            array = join_array(array, temp, count, 1);
-            if (!array)
-                error_cleanup(&array, &temp);
-            free_arr(temp);
-            temp = NULL;
-        }
+        dt->array = join_array(dt, j);
+        if (!dt->array)
+            error_cleanup(&dt->array, &dt->temp);
+        free_arr(dt->temp);
+        dt->temp = NULL;
     }
     printf("we're printing the final array\n");
-    for (int k = 0; array && array[k]; k++)
-        printf("array[%d]: %s\n", k, array[k]);
-
-    free_arr(array); //actually, we need to init_stack before reaching this point
+    for (int k = 0; dt->array && dt->array[k]; k++)
+        printf("array[%d]: %s\n", k, dt->array[k]);
+    init_stack(dt, ps);
+    free_arr(dt->array); //actually, we need to init_stack before reaching this point
 }
