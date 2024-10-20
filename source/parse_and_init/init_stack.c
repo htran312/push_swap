@@ -6,24 +6,13 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:36:25 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/19 17:33:10 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:06:35 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static long convert_and_check_range(char *str)
-{
-    long nbr;
-    
-    nbr = ft_atol(str);
-    if (nbr > MAX_INT || nbr < MIN_INT)
-    {
-        //error handling
-    }
-    return (nbr);
-}
-static void check_for_duplicate(int *seen_numbers, int seen_count, int nbr)
+static int check_for_duplicate(int *seen_numbers, int seen_count, int nbr)
 {
     int i;
 
@@ -31,17 +20,17 @@ static void check_for_duplicate(int *seen_numbers, int seen_count, int nbr)
     while(i < seen_count)
     {
         if (seen_numbers[i] == nbr)
-        {
-            //error handling
-        }
+            return (0);
+        i++;
     }
+    return (1);
 }
 static void push_to_stack(t_stack *stack, int value)
 {
     
 }
 
-static t_stack *create_stack(char **array, int count)
+static t_stack *create_stack(t_data *dt)
 {
     t_stack *stack;
     long nbr;
@@ -54,11 +43,15 @@ static t_stack *create_stack(char **array, int count)
         return (NULL);
     seen_count = 0;
     i = 0;
-    while(array[i])
+    while(dt->array[i])
     {
-        nbr = convert_and_check_range(array[i]);
-        check_for_duplicate(seen_numbers, seen_count, nbr);
-        seen_numbers[count++] = (int)nbr;
+        nbr = ft_atol(dt->array[i]);
+        if (!check_for_duplicate(seen_numbers, seen_count, nbr))
+        {
+            //free stack
+            error_cleanup(&dt->array, NULL);
+        }
+        seen_numbers[seen_count++] = (int)nbr;
         push_to_stack(stack, nbr);
         i++;
     }
@@ -67,7 +60,7 @@ static t_stack *create_stack(char **array, int count)
 
 void init_stack(t_data *dt, t_pushswap *ps)
 {
-    ps->a = create_stack(dt->array, dt->count);
+    ps->a = create_stack(dt);
     ps->b = ft_calloc(1, sizeof(t_stack));
     if (!ps->a || ps->b)
         error_cleanup(&dt->array, NULL);//error handling
