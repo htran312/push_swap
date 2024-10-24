@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:32:11 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/18 21:26:59 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:37:19 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void error_cleanup(char ***array, char ***temp)
     ft_putendl_fd("Error", 2);
     exit(EXIT_FAILURE);
 }
-static void duplicate_array_element(char ***dst, char **src, int start, int len, t_data *dt)
+static int duplicate_array_element(char ***dst, char **src, int start, int len)
 {
+    (void)src;
     int i;
 
     i = 0;
@@ -38,56 +39,65 @@ static void duplicate_array_element(char ***dst, char **src, int start, int len,
         if (!(*dst)[start + i])
         {
             free_arr(*dst);
-            error_cleanup(&dt->array, &dt->temp);
+            *dst = NULL;
+            return (0);
         }
         i++;
     }
+    return (1);
 }
-static char **join_array(t_data *dt, int temp_size)
+static char **join_array(char **array, char **temp, int count, int temp_size)
 {
     char **new_array;
     int old_size;
     
-    old_size = dt->count - temp_size;
-    new_array = malloc(sizeof(char *) * (dt->count + 1));
+    old_size = count - temp_size;
+    new_array = malloc(sizeof(char *) * (count + 1));
     if (!new_array)
-        error_cleanup(&dt->array, &dt->temp);
-    duplicate_array_element(&new_array, dt->array, 0, old_size, dt);
-    duplicate_array_element(&new_array, dt->temp, old_size, temp_size, dt);
-    new_array[dt->count] = NULL;
-    free_arr(dt->array);
-    dt->array = NULL;
-
+        error_cleanup(&array, &temp);
+    if (!duplicate_array_element(&new_array, array, 0, old_size) ||
+        !duplicate_array_element(&new_array, temp, old_size, temp_size))
+    {
+        free_arr(new_array);
+        new_array = NULL;
+        error_cleanup(&array, &temp);
+    }
+    new_array[count] = NULL;
+    free_arr(array);
+    array = NULL;
     return (new_array);
 }
-void parse_input(int argc, char **argv, t_data *dt, t_pushswap *ps)
+
+char **parse_input(int argc, char **argv, int *size)
 {
+    char **array;
+    char **temp;
+    int count;
     int i;
     int j;
 
+    array = NULL;
+    count = 0;
     i = 0;
     while (++i < argc)
     {
-        dt->temp = ft_split(argv[i], ' ');
-        if (!dt->temp || !dt->temp[0])
-            error_cleanup(&dt->array, &dt->temp);
+        temp = ft_split(argv[i], ' ');
+        if (!temp || !temp[0])
+            error_cleanup(&array, &temp);
         j = 0;
-        while (dt->temp && dt->temp[j])
+        while (temp && temp[j])
         {
-            if (!is_integer(dt->temp[j]))
-                error_cleanup(&dt->array, &dt->temp);
-            dt->count++;
+            count++;
             j++;
         }
-        dt->array = join_array(dt, j);
-        if (!dt->array)
-            error_cleanup(&dt->array, &dt->temp);
-        free_arr(dt->temp);
-        dt->temp = NULL;
+        array = join_array(array, temp, count, j);
+        if (!array)
+            error_cleanup(&array, &temp);
+        free_arr(temp);
+        temp = NULL;
     }
-    printf("we're printing the final array\n");
-    for (int k = 0; dt->array && dt->array[k]; k++)
-        printf("array[%d]: %s\n", k, dt->array[k]);
-    init_stack(dt, ps);
-    free_arr(dt->array); //actually, we need to init_stack before reaching this point
+    if (check_for_validity(array) == 1)
+        error_cleanup(&array, &temp);
+    *size = count;
+    return (array);
 }

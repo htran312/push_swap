@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:36:25 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/20 20:06:35 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:35:06 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ static int check_for_duplicate(int *seen_numbers, int seen_count, int nbr)
 }
 static void push_to_stack(t_stack *stack, int value)
 {
+    t_node *new_node;
     
+    new_node = ft_calloc(1, sizeof(t_node));
+    if (!new_node)
+    {
+        //free stack
+        error_cleanup()
+    }
 }
 
 static t_stack *create_stack(t_data *dt)
@@ -41,6 +48,7 @@ static t_stack *create_stack(t_data *dt)
     stack = ft_calloc(1, sizeof(t_stack));
     if (!stack)
         return (NULL);
+    ft_bzero(seen_numbers, sizeof(seen_numbers));
     seen_count = 0;
     i = 0;
     while(dt->array[i])
@@ -48,8 +56,8 @@ static t_stack *create_stack(t_data *dt)
         nbr = ft_atol(dt->array[i]);
         if (!check_for_duplicate(seen_numbers, seen_count, nbr))
         {
-            //free stack
-            error_cleanup(&dt->array, NULL);
+            //free stack;
+            //return (NULL);
         }
         seen_numbers[seen_count++] = (int)nbr;
         push_to_stack(stack, nbr);
@@ -62,7 +70,7 @@ void init_stack(t_data *dt, t_pushswap *ps)
 {
     ps->a = create_stack(dt);
     ps->b = ft_calloc(1, sizeof(t_stack));
-    if (!ps->a || ps->b)
+    if (!ps->a || !ps->b)
         error_cleanup(&dt->array, NULL);//error handling
     //initialize other members of stack a maybe?
     

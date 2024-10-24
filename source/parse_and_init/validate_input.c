@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:19:47 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/18 21:57:58 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:28:03 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,28 @@ static int check_character_and_sign(char *str)
     return (1);
 }
 
-int is_integer(char *str)
+int check_for_validity(char **array)
 {
-    if (!str || str[0] == '\0')
-        return (0);
-    if (!check_character_and_sign(str))
-        return (0);
-    if (!check_range(str))
-        return (0);
-    return (1);
+    int i;
+    int j;
+    
+    i = 0;
+    while (array[i])
+    {
+        if (!array[i] || array[i][0] == '\0')
+            return (1);
+        if (!check_character_and_sign(array[i]))
+            return (1);
+        if (!check_range(array[i]))
+            return (1);
+        j = 0;
+        while (j < i)
+        {
+            if (ft_atoi(array[j]) == ft_atoi(array[i]))
+                return (1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
 }
