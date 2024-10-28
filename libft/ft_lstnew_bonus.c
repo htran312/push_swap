@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/28 21:15:07 by htran-th         ###   ########.fr       */
+/*   Created: 2024/05/10 17:19:28 by htran-th          #+#    #+#             */
+/*   Updated: 2024/05/14 20:32:24 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+t_list	*ft_lstnew(void *content)
 {
-    t_pushswap ps;
-    int count;
-    char **parsed_array;
-    
-    if (argc < 2)
-        return (0);
-    ft_bzero(&ps, sizeof(ps));
-    count = 0;
-    parsed_array = parse_input(argc, argv, &count);
-    init_stack(&ps, parsed_array);
-    
-    free_arr(parsed_array);
-    parsed_array = NULL;
-    
-    
+	t_list	*node;
 
-
-
-    
-    
+	node = (t_list *)malloc(sizeof(t_list));
+	if (node == NULL)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }

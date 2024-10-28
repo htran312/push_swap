@@ -14,7 +14,8 @@ STACK_DIR		:=	parse_and_init
 UTILS_DIR		:=	utils
 
 STACK_FILES		:=	parse_input.c	\
-					validate_input.c 
+					validate_input.c	\
+					init_stack.c 
 UTILS_FILES		:=	utils.c
 
 MAN_SRC			:= main.c	$(addprefix	$(MAN_DIR)/$(STACK_DIR)/,	$(STACK_FILES))	\

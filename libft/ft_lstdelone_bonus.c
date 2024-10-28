@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/28 21:15:07 by htran-th         ###   ########.fr       */
+/*   Created: 2024/05/11 23:16:55 by htran-th          #+#    #+#             */
+/*   Updated: 2024/05/15 14:56:50 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-    t_pushswap ps;
-    int count;
-    char **parsed_array;
-    
-    if (argc < 2)
-        return (0);
-    ft_bzero(&ps, sizeof(ps));
-    count = 0;
-    parsed_array = parse_input(argc, argv, &count);
-    init_stack(&ps, parsed_array);
-    
-    free_arr(parsed_array);
-    parsed_array = NULL;
-    
-    
-
-
-
-    
-    
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
 }

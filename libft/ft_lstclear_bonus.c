@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/28 21:15:07 by htran-th         ###   ########.fr       */
+/*   Created: 2024/05/12 00:38:20 by htran-th          #+#    #+#             */
+/*   Updated: 2024/05/15 15:14:15 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-    t_pushswap ps;
-    int count;
-    char **parsed_array;
-    
-    if (argc < 2)
-        return (0);
-    ft_bzero(&ps, sizeof(ps));
-    count = 0;
-    parsed_array = parse_input(argc, argv, &count);
-    init_stack(&ps, parsed_array);
-    
-    free_arr(parsed_array);
-    parsed_array = NULL;
-    
-    
+	t_list	*cur_node;
+	t_list	*next_node;
 
-
-
-    
-    
+	if (!lst || !del || !(*lst))
+		return ;
+	cur_node = (*lst);
+	while (cur_node != NULL)
+	{
+		next_node = cur_node->next;
+		del(cur_node->content);
+		free(cur_node);
+		cur_node = next_node;
+	}
+	*lst = NULL;
 }

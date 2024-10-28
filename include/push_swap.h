@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/24 21:40:15 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/28 21:59:45 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ typedef struct s_stack
     int size;
 }   t_stack;
 
-/*typedef struct s_data
-{
-    char **array;
-    char **temp;
-    int count;
-}   t_data;*/
-
 typedef struct s_pushswap
 {
     t_stack *a;
@@ -58,6 +51,7 @@ void error_cleanup(char ***array, char ***temp);
 //int is_integer(char *str);
 int check_for_validity(char **array);
 long	ft_atol(const char *str);
-//void init_stack(t_data *dt, t_pushswap *ps);
+void init_stack(t_pushswap *ps, char **array);
+t_node *find_last_node(t_node *node);
 
 #endif
