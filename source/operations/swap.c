@@ -6,7 +6,50 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:50:55 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/12 16:50:56 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:24:13 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
+void swap(t_stack *stack)
+{
+    t_node *first;
+    t_node *second;
+    
+    if ((!stack) || stack->size < 2)
+        return ;
+    first = stack->top;
+    second = first->next;
+    second->prev = NULL;
+    stack->top = second;
+    first->next = second->next;
+    if (first->next)
+        second->next->prev = first;
+    second->next = first;
+    first->prev = second;
+    if (stack->size == 2)
+        stack->end = first;
+}
+void sa(t_stack *stack)
+{
+    if ((!stack) || stack->size < 2)
+        return ;
+    swap(stack);
+    ft_printf("sa\n");
+}
+void sb(t_stack *stack)
+{
+    if ((!stack) || stack->size < 2)
+        return ;
+    swap(stack);
+    ft_printf("sb\n");
+}
+void ss(t_pushswap *ps)
+{
+    if ((!ps->a) || !ps->b || ps->a->size < 2  || ps->b->size < 2)
+        return ;
+    sa(ps->a);
+    sb(ps->b);
+    ft_printf("ss\n");
+}
