@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/28 21:59:45 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:59:43 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,15 @@ typedef struct s_pushswap
 char **parse_input(int argc, char **argv, int *count);
 void	free_arr(char **ar);
 void error_cleanup(char ***array, char ***temp);
-//int is_integer(char *str);
 int check_for_validity(char **array);
 long	ft_atol(const char *str);
 void init_stack(t_pushswap *ps, char **array);
-t_node *find_last_node(t_node *node);
+
+// Operations
+void sa(t_stack *stack);
+void sb(t_stack *stack);
+void ss(t_pushswap *ps);
+void pa(t_pushswap *ps);
+void pb(t_pushswap *ps);
 
 #endif

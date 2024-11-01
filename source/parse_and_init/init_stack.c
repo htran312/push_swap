@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:36:25 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/31 19:06:56 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:39:22 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ void init_stack(t_pushswap *ps, char **array)
     get_rank(ps->a);
     t_node *temp;
     temp = ps->a->top;
+    printf("\nBEFORE SORTING\n");
     while (temp)
     {
         printf("the node value is %d with rank %d\n", temp->value, temp->rank);
         temp = temp->next;
     }
     printf("size of the stack is %d\n", ps->a->size);
-
 }

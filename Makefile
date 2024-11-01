@@ -10,15 +10,19 @@ HEADERS			:= -I $(LIBFT_DIR) -I./include
 
 MAN_DIR 		:=	./source
 
+OPS_DIR			:=	operations
 STACK_DIR		:=	parse_and_init
 UTILS_DIR		:=	utils
 
+OPS_FILES		:=	swap.c	\
+					push.c
 STACK_FILES		:=	parse_input.c	\
 					validate_input.c	\
 					init_stack.c 
 UTILS_FILES		:=	utils.c
 
-MAN_SRC			:= main.c	$(addprefix	$(MAN_DIR)/$(STACK_DIR)/,	$(STACK_FILES))	\
+MAN_SRC			:= main.c	$(addprefix	$(MAN_DIR)/$(OPS_DIR)/,	$(OPS_FILES))	\
+							$(addprefix	$(MAN_DIR)/$(STACK_DIR)/,	$(STACK_FILES))	\
 							$(addprefix	$(MAN_DIR)/$(UTILS_DIR)/,	$(UTILS_FILES))
 
 MAN_OBJ			:=	$(MAN_SRC:.c=.o)
