@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/01 17:59:43 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:41:50 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,16 @@ long	ft_atol(const char *str);
 void init_stack(t_pushswap *ps, char **array);
 
 // Operations
+void swap(t_stack *stack);
 void sa(t_stack *stack);
 void sb(t_stack *stack);
 void ss(t_pushswap *ps);
 void pa(t_pushswap *ps);
 void pb(t_pushswap *ps);
+void rotate(t_stack *stack);
+void ra(t_stack *stack);
+void rb(t_stack *stack);
+void rr(t_pushswap *ps);
+
 
 #endif

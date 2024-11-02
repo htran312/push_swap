@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/01 21:58:25 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/02 20:57:38 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,7 @@ int main(int argc, char **argv)
     
     free_arr(parsed_array);
     parsed_array = NULL;
-    pb(&ps);
-    pb(&ps);
-    pb(&ps);
-    pb(&ps);
-
+    ra(ps.a);
     t_node *temp;
     
     temp = ps.a->top;

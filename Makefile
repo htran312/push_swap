@@ -14,9 +14,10 @@ OPS_DIR			:=	operations
 STACK_DIR		:=	parse_and_init
 UTILS_DIR		:=	utils
 
-OPS_FILES		:=	swap.c	\
+OPS_FILES		:=	rotate.c			\
+					swap.c				\
 					push.c
-STACK_FILES		:=	parse_input.c	\
+STACK_FILES		:=	parse_input.c		\
 					validate_input.c	\
 					init_stack.c 
 UTILS_FILES		:=	utils.c

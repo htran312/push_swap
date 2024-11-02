@@ -6,13 +6,13 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:50:55 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/01 20:39:29 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:25:09 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void swap(t_stack *stack)
+void swap(t_stack *stack)
 {
     t_node *first;
     t_node *second;
