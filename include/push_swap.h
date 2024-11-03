@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/02 21:41:50 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/03 04:25:25 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ void rotate(t_stack *stack);
 void ra(t_stack *stack);
 void rb(t_stack *stack);
 void rr(t_pushswap *ps);
-
+void reverse_rotate(t_stack *stack);
+void rra(t_stack *stack);
+void rrb(t_stack *stack);
+void rrr(t_pushswap *ps);
+void sort_three(t_stack *stack);
 
 #endif

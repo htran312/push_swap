@@ -12,18 +12,22 @@ MAN_DIR 		:=	./source
 
 OPS_DIR			:=	operations
 STACK_DIR		:=	parse_and_init
+SORT_DIR		:=	sorting
 UTILS_DIR		:=	utils
 
 OPS_FILES		:=	rotate.c			\
 					swap.c				\
+					reverse_rotate.c	\
 					push.c
 STACK_FILES		:=	parse_input.c		\
 					validate_input.c	\
-					init_stack.c 
+					init_stack.c
+SORT_FILES		:= 	sort_three.c
 UTILS_FILES		:=	utils.c
 
 MAN_SRC			:= main.c	$(addprefix	$(MAN_DIR)/$(OPS_DIR)/,	$(OPS_FILES))	\
 							$(addprefix	$(MAN_DIR)/$(STACK_DIR)/,	$(STACK_FILES))	\
+							$(addprefix	$(MAN_DIR)/$(SORT_DIR)/,	$(SORT_FILES))	\
 							$(addprefix	$(MAN_DIR)/$(UTILS_DIR)/,	$(UTILS_FILES))
 
 MAN_OBJ			:=	$(MAN_SRC:.c=.o)
