@@ -1,7 +1,7 @@
 NAME 			:= push_swap
 
 CC 				:= cc
-CFLAGS 			:= -Wall -Wextra -Werror
+CFLAGS 			:= -g -Wall -Wextra -Werror
 
 LIBFT_DIR		:=	./libft
 LIBFT			:=	$(LIBFT_DIR)/libft.a
@@ -22,7 +22,8 @@ OPS_FILES		:=	rotate.c			\
 STACK_FILES		:=	parse_input.c		\
 					validate_input.c	\
 					init_stack.c
-SORT_FILES		:= 	sort_three.c
+SORT_FILES		:= 	sort_three.c		\
+					sort_five.c
 UTILS_FILES		:=	utils.c
 
 MAN_SRC			:= main.c	$(addprefix	$(MAN_DIR)/$(OPS_DIR)/,	$(OPS_FILES))	\

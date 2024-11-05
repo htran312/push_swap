@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:50:55 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/02 17:25:09 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/03 05:59:27 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void swap(t_stack *stack)
     if (stack->size == 2)
         stack->end = first;
 }
-void sa(t_stack *stack)
+void sa(t_pushswap *ps)
 {
-    if ((!stack) || stack->size < 2)
+    if ((!ps->a) || ps->a->size < 2)
         return ;
-    swap(stack);
+    swap(ps->a);
     ft_putendl_fd("sa\n", 1);
 }
-void sb(t_stack *stack)
+void sb(t_pushswap *ps)
 {
-    if ((!stack) || stack->size < 2)
+    if ((!ps->b) || ps->b->size < 2)
         return ;
-    swap(stack);
+    swap(ps->b);
     ft_putendl_fd("sb\n", 1);
 }
 void ss(t_pushswap *ps)

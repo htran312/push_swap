@@ -6,13 +6,13 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:36:25 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/01 14:39:22 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:13:48 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int smallest_among_us(t_stack *stack)
+static int unranked_smallest_value(t_stack *stack)
 {
     t_node *tmp;
     int small;
@@ -39,7 +39,7 @@ static void get_rank(t_stack *stack)
         tmp = stack->top;
         while (tmp)
         {
-            if (tmp->rank == -1 && tmp->value == smallest_among_us(stack))
+            if (tmp->rank == -1 && tmp->value == unranked_smallest_value(stack))
             {
                 tmp->rank = i;
                 break ;
@@ -94,13 +94,7 @@ void init_stack(t_pushswap *ps, char **array)
         i++;
     }
     get_rank(ps->a);
-    t_node *temp;
-    temp = ps->a->top;
+    
     printf("\nBEFORE SORTING\n");
-    while (temp)
-    {
-        printf("the node value is %d with rank %d\n", temp->value, temp->rank);
-        temp = temp->next;
-    }
-    printf("size of the stack is %d\n", ps->a->size);
+    print_stack(ps->a);
 }

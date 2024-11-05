@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/03 04:25:25 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:05:48 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,23 @@ void init_stack(t_pushswap *ps, char **array);
 
 // Operations
 void swap(t_stack *stack);
-void sa(t_stack *stack);
-void sb(t_stack *stack);
+void sa(t_pushswap *ps);
+void sb(t_pushswap *ps);
 void ss(t_pushswap *ps);
 void pa(t_pushswap *ps);
 void pb(t_pushswap *ps);
 void rotate(t_stack *stack);
-void ra(t_stack *stack);
-void rb(t_stack *stack);
+void ra(t_pushswap *ps);
+void rb(t_pushswap *ps);
 void rr(t_pushswap *ps);
 void reverse_rotate(t_stack *stack);
-void rra(t_stack *stack);
-void rrb(t_stack *stack);
+void rra(t_pushswap *ps);
+void rrb(t_pushswap *ps);
 void rrr(t_pushswap *ps);
-void sort_three(t_stack *stack);
+void sort_three(t_pushswap *ps);
+void sort_five(t_pushswap *ps);
+
+//Delete before submitting
+void print_stack(t_stack *stack);
 
 #endif

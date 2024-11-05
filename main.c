@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/03 04:25:58 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:15:02 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,30 @@ int main(int argc, char **argv)
     
     free_arr(parsed_array);
     parsed_array = NULL;
-    sort_three(ps.a);
-    t_node *temp;
     
-    temp = ps.a->top;
+    sort_five(&ps);
+
     printf("\nAFTER SORTING\n");
     printf("STACK A:\n");
-    while (temp)
-    {
-        printf("the node value is %d with rank %d\n", temp->value, temp->rank);
-        temp = temp->next;
-    }
-    printf("size of the stack is %d\n", ps.a->size);
-    temp = ps.b->top;
+    print_stack(ps.a);
+    //t_node *temp;
+    
+    //temp = ps.a->top;
+    //while (temp)
+    //{
+    //   printf("the node value is %d with rank %d\n", temp->value, temp->rank);
+    //    temp = temp->next;
+    //}
+    //printf("size of the stack is %d\n", ps.a->size);
+    //temp = ps.b->top;
     printf("STACK B:\n");
-    while (temp)
-    {
-        printf("the node value is %d with rank %d\n", temp->value, temp->rank);
-        temp = temp->next;
-    }
-    printf("size of the stack is %d\n", ps.b->size);
+    print_stack(ps.b);
+    //while (temp)
+    //{
+    //    printf("the node value is %d with rank %d\n", temp->value, temp->rank);
+    //    temp = temp->next;
+    //}
+    //printf("size of the stack is %d\n", ps.b->size);
 
     
 

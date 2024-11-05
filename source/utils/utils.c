@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 19:40:59 by htran-th          #+#    #+#             */
-/*   Updated: 2024/10/29 15:37:44 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:09:37 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,17 @@ void	free_arr(char **ar)
 		i++;
 	}
 	free (ar);
+}
+
+void print_stack(t_stack *stack)
+{
+	t_node *temp;
+	
+	temp = stack->top;
+	while (temp)
+    {
+        printf("the node value is %d with rank %d\n", temp->value, temp->rank);
+        temp = temp->next;
+    }
+	printf("size of the stack is %d\n", stack->size);
 }
