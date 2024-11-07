@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/05 15:05:48 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:27:40 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include "libft.h"
 
 # define MIN_INT -2147483648
@@ -29,6 +30,7 @@ typedef struct s_node
     struct s_node *next;
     int value;
     int rank;
+    int chunk_id;
 }   t_node;
 
 // Now, create a (linked) list of nodes (aka a stack)

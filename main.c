@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/05 15:15:02 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:42:10 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int main(int argc, char **argv)
     //temp = ps.b->top;
     printf("STACK B:\n");
     print_stack(ps.b);
+    int a = 10;
+    ft_printf("a is now %x\n", a);
     //while (temp)
     //{
     //    printf("the node value is %d with rank %d\n", temp->value, temp->rank);

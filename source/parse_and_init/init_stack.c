@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:36:25 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/05 15:13:48 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:28:11 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void init_stack(t_pushswap *ps, char **array)
         node->next = NULL;
         node->value = ft_atoi(array[i]);
         node->rank = -1;
+        node->chunk_id = -1;
         add_node_to_end(ps->a, node);
         i++;
     }
