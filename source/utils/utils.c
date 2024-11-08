@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 19:40:59 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/05 15:09:37 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/08 23:07:20 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,30 @@ void	free_arr(char **ar)
 	}
 	free (ar);
 }
+bool is_sorted(t_stack *stack)
+{
+	t_node *tmp;
+	
+	tmp = stack->top;
+	if (!stack || stack->size < 2)
+		return (true);
+	while (tmp)
+	{
+		if (tmp->next && tmp->value > tmp->next->value)
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
+}
+void update_chunk(t_stack *stack, t_range *range, int size, int chunk_id)
+{
+	int median;
+	int spread_radius;
+
+	median = size / 2;
+	
+}
+
 
 void print_stack(t_stack *stack)
 {

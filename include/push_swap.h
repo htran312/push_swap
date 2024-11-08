@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/07 21:27:40 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/08 22:08:35 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,21 @@ typedef struct s_pushswap
     t_stack *b;
 }   t_pushswap;
 
+typedef struct s_range
+{
+    int start;
+    int end;
+}   t_range;
+
 char **parse_input(int argc, char **argv, int *count);
-void	free_arr(char **ar);
 void error_cleanup(char ***array, char ***temp);
 int check_for_validity(char **array);
-long	ft_atol(const char *str);
 void init_stack(t_pushswap *ps, char **array);
+
+// Utils
+long	ft_atol(const char *str);
+void	free_arr(char **ar);
+bool is_sorted(t_stack *stack);
 
 // Operations
 void swap(t_stack *stack);
@@ -69,10 +78,14 @@ void reverse_rotate(t_stack *stack);
 void rra(t_pushswap *ps);
 void rrb(t_pushswap *ps);
 void rrr(t_pushswap *ps);
+
+// Algorithm
 void sort_three(t_pushswap *ps);
 void sort_five(t_pushswap *ps);
+void push_a_to_b(t_pushswap *ps, int size);
 
-//Delete before submitting
+
+// Delete before submitting
 void print_stack(t_stack *stack);
 
 #endif
