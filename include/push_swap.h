@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:21:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/08 22:08:35 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:17:06 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void init_stack(t_pushswap *ps, char **array);
 long	ft_atol(const char *str);
 void	free_arr(char **ar);
 bool is_sorted(t_stack *stack);
+int calculate_amount_of_chunk(int size);
+bool check_lower_half_sent(t_stack *stack, t_range *range, int median, int chunk_id);
+bool check_upper_half_sent(t_stack *stack, t_range *range, int median, int chunk_id);
+void update_chunk(t_stack *stack, t_range *range, int size, int chunk_id);
 
 // Operations
 void swap(t_stack *stack);
@@ -83,6 +87,7 @@ void rrr(t_pushswap *ps);
 void sort_three(t_pushswap *ps);
 void sort_five(t_pushswap *ps);
 void push_a_to_b(t_pushswap *ps, int size);
+void push_b_to_a(t_pushswap *ps, int size);
 
 
 // Delete before submitting

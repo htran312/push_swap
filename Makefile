@@ -22,7 +22,9 @@ OPS_FILES		:=	rotate.c			\
 STACK_FILES		:=	parse_input.c		\
 					validate_input.c	\
 					init_stack.c
-SORT_FILES		:= 	sort_three.c		\
+SORT_FILES		:= 	pa2b.c				\
+					pb2a.c 				\
+					sort_three.c		\
 					sort_five.c
 UTILS_FILES		:=	utils.c
 

@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:56:14 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/08 16:16:04 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/10 22:08:16 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int main(int argc, char **argv)
     if (!is_sorted(ps.a))
     {
         printf("Stack is not sorted yet!");
-        sort_five(&ps);
+        push_a_to_b(&ps, ps.a->size);
+        //push_b_to_a(&ps, ps.b->size);
     }
     printf("\nAFTER SORTING\n");
     printf("STACK A:\n");
