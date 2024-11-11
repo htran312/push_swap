@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 05:36:02 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/10 22:24:24 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/11 21:20:38 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void set_chunk_range(t_range *range, int size)
     range->end = median + spread_radius;
     if (range->start < 0)
         range->start = 0;
-    if (range->end > size - 4)
+    if (range->end > size - 3)
         range->end = size - 4;
 }
 // static bool is_in_chunk(t_stack *stack, int *start, int *end)
@@ -48,13 +48,14 @@ Check if there's any node still left in the chunk.
 static bool check_chunk_sent(t_stack *stack, int start, int end, int chunk_id)
 {
     t_node *tmp;
+    (void)chunk_id;
 
     tmp = stack->top;
     while (tmp)
     {
         if (tmp->rank >= start && tmp->rank <= end)
         {
-            if (tmp->chunk_id != chunk_id)
+            if (tmp->chunk_id == -1)
                 return (false);
         }
         tmp = tmp->next;
@@ -70,23 +71,26 @@ void push_a_to_b(t_pushswap *ps, int size)
     int chunk_id;
     
     chunk_id = 0;
-    set_chunk_range(&range, size);
     while (ps->a->size > 3)
     {
+        set_chunk_range(&range, size);
         while (!check_chunk_sent(ps->a, range.start, range.end, chunk_id) && ps->a->size)
         {
             if (ps->a->top->rank >= range.start && ps->a->top->rank <= range.end)
             {
                 ps->a->top->chunk_id = chunk_id;
                 pb(ps);
+                printf("the number got sent is %d\n", ps->b->top->rank);
                 if (ps->b->top->rank < (size / 2))
                     rb(ps);
             }
             else
                 ra(ps);
+            printf("The range before updating is [%d : %d]\n", range.start, range.end);
             update_chunk(ps->a, &range, size, chunk_id);
+            printf("The rangeafter updating  is [%d : %d]\n", range.start, range.end);
         }
-        chunk_id++;
+        //chunk_id++;
     }
     if (!is_sorted(ps->a))
         sort_three(ps);

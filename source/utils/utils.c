@@ -6,7 +6,7 @@
 /*   By: htran-th <htran-th@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 19:40:59 by htran-th          #+#    #+#             */
-/*   Updated: 2024/11/10 22:22:04 by htran-th         ###   ########.fr       */
+/*   Updated: 2024/11/11 21:28:21 by htran-th         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,22 @@ void	free_arr(char **ar)
 	}
 	free (ar);
 }
+// bool	is_sorted(t_stack *stack)
+// {
+// 	t_node	*temp;
+
+// 	temp = stack->top;
+// 	if (!stack || stack->size < 2)
+//  		return (true);
+// 	while (temp->prev)
+// 	{
+// 		if (temp->value > temp->prev->value)
+// 			return (false);
+// 		temp = temp->prev;
+// 	}
+// 	return (true);
+// }
+
 bool is_sorted(t_stack *stack)
 {
 	t_node *tmp;
@@ -64,6 +80,8 @@ bool is_sorted(t_stack *stack)
 	}
 	return (true);
 }
+
+
 //calculate how many chunk the input should be divided into
 //if it's > 201 numbers ->13 chunks
 //else -> 5 chunks
@@ -85,7 +103,7 @@ bool check_lower_half_sent(t_stack *stack, t_range *range, int median, int chunk
 	tmp = stack->top;
 	while (tmp)
 	{
-		if (tmp->chunk_id == chunk_id && tmp->rank >= range->start && tmp->rank <= median)
+		if (tmp->chunk_id == chunk_id && tmp->rank >= range->start && tmp->rank < median)
 			return (false);
 		tmp = tmp->next;
 	}
@@ -98,7 +116,7 @@ bool check_upper_half_sent(t_stack *stack, t_range *range, int median, int chunk
 	tmp = stack->end;
 	while (tmp)
 	{
-		if (tmp->chunk_id == chunk_id && tmp->rank <= range->end && tmp->rank >= median)
+		if (tmp->chunk_id != chunk_id && tmp->rank <= range->end && tmp->rank >= median)
 			return (false);
 		tmp = tmp->prev;
 	}
@@ -113,9 +131,17 @@ void update_chunk(t_stack *stack, t_range *range, int size, int chunk_id)
 	median = size / 2;
 	spread_radius = size / calculate_amount_of_chunk(size);
 	if (check_lower_half_sent(stack, range, median, chunk_id))
+	{
 		range->start -= spread_radius;
+		// if (range->start < 0)
+		// 	range->start = 0;
+	}
 	if (check_upper_half_sent(stack, range, median, chunk_id))
+	{
 		range->end += spread_radius;
+		// if (range->end >= size - 3)
+		// 	range->end = size - 4;
+	}
 	if (range->start < 0)
 		range->start = 0;
 	if (range->end >= size - 3)
@@ -130,7 +156,7 @@ void print_stack(t_stack *stack)
 	temp = stack->top;
 	while (temp)
     {
-        printf("the node value is %d with rank %d\n", temp->value, temp->rank);
+        printf("the node value is %d with rank %d anh chunk_id %d\n", temp->value, temp->rank, temp->chunk_id);
         temp = temp->next;
     }
 	printf("size of the stack is %d\n", stack->size);
