@@ -26,7 +26,8 @@ SORT_FILES		:= 	pa2b.c				\
 					pb2a.c 				\
 					sort_three.c		\
 					sort_five.c
-UTILS_FILES		:=	utils.c
+UTILS_FILES		:=	free.c				\
+					utils.c
 
 MAN_SRC			:= main.c	$(addprefix	$(MAN_DIR)/$(OPS_DIR)/,	$(OPS_FILES))	\
 							$(addprefix	$(MAN_DIR)/$(STACK_DIR)/,	$(STACK_FILES))	\
